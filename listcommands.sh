@@ -23,3 +23,12 @@ function lc() {
 	grep $PWD" " ~/.lc_history | while read line; do echo ${line#* }; done >> ~/.lc_tmp
 	awk ' !x[$0]++' ~/.lc_tmp
 }
+
+function hist() {
+	echo List history with directory:
+	if [[ -n $1 ]]; then
+      tail -n $1 ~/.lc_history
+    else
+      cat ~/.lc_history
+    fi
+}
