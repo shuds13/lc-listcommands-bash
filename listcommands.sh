@@ -25,8 +25,8 @@ function lc() {
 }
 
 function hist() {
-	echo List history with directory:
-	if [[ -n $1 ]]; then
+    echo List history with directory:
+    if [[ -n $1 ]]; then
       tail -n $1 ~/.lc_history
     else
       cat ~/.lc_history
