@@ -25,10 +25,23 @@ function lc() {
 }
 
 function hist() {
-    echo List history with directory:
+    # List history with directory:
     if [[ -n $1 ]]; then
       tail -n $1 ~/.lc_history
     else
       cat ~/.lc_history
+    fi
+}
+
+function histfrom() {
+    # More history with directory from last match of $1
+    # Ignore entries which are histfrom commands themself
+    # This could be improved maybe. It matches dir or command, and only allows from last
+    # Good for finding commands after last login - if capture (e.g. type start when login).
+    if [[ -n $1 ]]; then
+      last_match=$(grep -n $1 .lc_history |grep -v "histfrom"|cut -f1 -d:|tail -n 1)
+      [[ -n $last_match ]] && more +$last_match ~/.lc_history
+    else
+      echo Supply a string to search from.
     fi
 }
